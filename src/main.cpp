@@ -1,9 +1,10 @@
-#include "conf.hpp"
+#include "rubiks_cube.hpp"
 
 int main()
 {
-    // read; write;
-    // makeConsoleUTF8;
+    RubiksCube cube;
+    cube.rotateBottomClockwise();
 
+    cube.displayCube();
     return EXIT_SUCCESS;
 }
