@@ -143,113 +143,89 @@ void RubiksCube::shuffle()
     }
 }
 
+bool RubiksCube::isSolved()
+{
+    for (int face = 0; face < FACES; face++)
+    {
+        if (!isFaceSolved(static_cast<COLOR>(face)))
+        {
+            return false;
+        }
+    }
+    return true;
+}
+
 void RubiksCube::rotateFrontClockwise()
 {
     RubiksCube::rotateFaceClockwise(FRONT);
 
-    vector<COLOR> temp(SIZE), temp1(SIZE);
+    vector<COLOR> temp(SIZE);
 
     for (int i = 0; i < SIZE; i++)
         temp[i] = cube[TOP][ROWS - 1][i];
 
     for (int i = 0; i < SIZE; i++)
         cube[TOP][ROWS - 1][i] = cube[LEFT][i][COLS - 1];
-
     for (int i = 0; i < SIZE; i++)
-        temp1[i] = cube[RIGHT][i][0];
-
+        cube[LEFT][i][COLS - 1] = cube[DOWN][0][i];
+    for (int i = 0; i < SIZE; i++)
+        cube[DOWN][0][i] = cube[RIGHT][i][0];
     for (int i = 0; i < SIZE; i++)
         cube[RIGHT][i][0] = temp[i];
-
-    for (int i = 0; i < SIZE; i++)
-        temp[i] = cube[DOWN][0][i];
-
-    for (int i = 0; i < SIZE; i++)
-        cube[DOWN][0][i] = temp1[i];
-
-    for (int i = 0; i < SIZE; i++)
-        cube[LEFT][i][COLS - 1] = temp[i];
 }
 
 void RubiksCube::rotateFrontInverted()
 {
     RubiksCube::rotateFaceInverted(FRONT);
-    vector<COLOR> temp(SIZE), temp1(SIZE);
+    vector<COLOR> temp(SIZE);
 
     for (int i = 0; i < SIZE; i++)
         temp[i] = cube[TOP][ROWS - 1][i];
 
     for (int i = 0; i < SIZE; i++)
         cube[TOP][ROWS - 1][i] = cube[RIGHT][i][0];
-
     for (int i = 0; i < SIZE; i++)
-        temp1[i] = cube[LEFT][i][COLS - 1];
-
+        cube[RIGHT][i][0] = cube[DOWN][0][i];
+    for (int i = 0; i < SIZE; i++)
+        cube[DOWN][0][i] = cube[LEFT][i][COLS - 1];
     for (int i = 0; i < SIZE; i++)
         cube[LEFT][i][COLS - 1] = temp[i];
-
-    for (int i = 0; i < SIZE; i++)
-        temp[i] = cube[DOWN][0][i];
-
-    for (int i = 0; i < SIZE; i++)
-        cube[DOWN][0][i] = temp1[i];
-
-    for (int i = 0; i < SIZE; i++)
-        cube[RIGHT][i][0] = temp[i];
 }
 
 void RubiksCube::rotateRightClockwise()
 {
     RubiksCube::rotateFaceClockwise(RIGHT);
-    vector<COLOR> temp(SIZE), temp1(SIZE);
+    vector<COLOR> temp(SIZE);
 
     for (int i = 0; i < SIZE; i++)
         temp[i] = cube[TOP][i][COLS - 1];
 
     for (int i = 0; i < SIZE; i++)
         cube[TOP][i][COLS - 1] = cube[FRONT][i][COLS - 1];
-
     for (int i = 0; i < SIZE; i++)
-        temp1[i] = cube[BACK][i][0];
-
+        cube[FRONT][i][COLS - 1] = cube[DOWN][i][COLS - 1];
+    for (int i = 0; i < SIZE; i++)
+        cube[DOWN][i][COLS - 1] = cube[BACK][i][0];
     for (int i = 0; i < SIZE; i++)
         cube[BACK][i][0] = temp[i];
-
-    for (int i = 0; i < SIZE; i++)
-        temp[i] = cube[DOWN][i][COLS - 1];
-
-    for (int i = 0; i < SIZE; i++)
-        cube[DOWN][i][COLS - 1] = temp1[i];
-
-    for (int i = 0; i < SIZE; i++)
-        cube[FRONT][i][COLS - 1] = temp[i];
 }
 
 void RubiksCube::rotateRightInverted()
 {
     RubiksCube::rotateFaceInverted(RIGHT);
-    vector<COLOR> temp(SIZE), temp1(SIZE);
+    vector<COLOR> temp(SIZE);
 
     for (int i = 0; i < SIZE; i++)
         temp[i] = cube[TOP][i][COLS - 1];
 
     for (int i = 0; i < SIZE; i++)
         cube[TOP][i][COLS - 1] = cube[BACK][i][0];
-
     for (int i = 0; i < SIZE; i++)
-        temp1[i] = cube[FRONT][i][COLS - 1];
-
+        cube[BACK][i][0] = cube[DOWN][i][COLS - 1];
+    for (int i = 0; i < SIZE; i++)
+        cube[DOWN][i][COLS - 1] = cube[FRONT][i][COLS - 1];
     for (int i = 0; i < SIZE; i++)
         cube[FRONT][i][COLS - 1] = temp[i];
-
-    for (int i = 0; i < SIZE; i++)
-        temp[i] = cube[DOWN][i][COLS - 1];
-
-    for (int i = 0; i < SIZE; i++)
-        cube[DOWN][i][COLS - 1] = temp1[i];
-
-    for (int i = 0; i < SIZE; i++)
-        cube[BACK][i][0] = temp[i];
 }
 
 void RubiksCube::rotateUpClockwise()
@@ -271,109 +247,70 @@ void RubiksCube::rotateUpClockwise()
 void RubiksCube::rotateUpInverted()
 {
     RubiksCube::rotateFaceInverted(TOP);
-    vector<COLOR> temp(SIZE), temp1(SIZE);
+    vector<COLOR> temp(SIZE);
+    for (int i = 0; i < SIZE; i++)
+        temp[i] = cube[FRONT][0][i];
 
     for (int i = 0; i < SIZE; i++)
-        temp[i] = cube[RIGHT][0][i];
-
+        cube[FRONT][0][i] = cube[LEFT][0][i];
     for (int i = 0; i < SIZE; i++)
-        cube[RIGHT][0][i] = cube[BACK][0][i];
-
+        cube[LEFT][0][i] = cube[BACK][0][i];
     for (int i = 0; i < SIZE; i++)
-        temp1[i] = cube[FRONT][0][i];
-
+        cube[BACK][0][i] = cube[RIGHT][0][i];
     for (int i = 0; i < SIZE; i++)
-        cube[FRONT][0][i] = temp[i];
-
-    for (int i = 0; i < SIZE; i++)
-        temp[i] = cube[RIGHT][0][i];
-
-    for (int i = 0; i < SIZE; i++)
-        cube[RIGHT][0][i] = temp1[i];
-
-    for (int i = 0; i < SIZE; i++)
-        cube[BACK][0][i] = temp[i];
+        cube[RIGHT][0][i] = temp[i];
 }
 
 void RubiksCube::rotateBackClockwise()
 {
     RubiksCube::rotateFaceClockwise(BACK);
-    vector<COLOR> temp(SIZE), temp1(SIZE);
+    vector<COLOR> temp(SIZE);
 
     for (int i = 0; i < SIZE; i++)
-        temp[i] = cube[RIGHT][i][COLS - 1];
-
+        temp[i] = cube[TOP][0][i];
+    for (int i = 0; i < SIZE; i++)
+        cube[TOP][0][i] = cube[RIGHT][i][COLS - 1];
     for (int i = 0; i < SIZE; i++)
         cube[RIGHT][i][COLS - 1] = cube[DOWN][ROWS - 1][i];
-
     for (int i = 0; i < SIZE; i++)
-        temp1[i] = cube[TOP][0][i];
-
+        cube[DOWN][ROWS - 1][i] = cube[LEFT][i][0];
     for (int i = 0; i < SIZE; i++)
-        cube[TOP][0][i] = temp[i];
-
-    for (int i = 0; i < SIZE; i++)
-        temp[i] = cube[LEFT][i][0];
-
-    for (int i = 0; i < SIZE; i++)
-        cube[LEFT][i][0] = temp1[i];
-
-    for (int i = 0; i < SIZE; i++)
-        cube[DOWN][ROWS - 1][i] = temp[i];
+        cube[LEFT][i][0] = temp[i];
 }
 
 void RubiksCube::rotateBackInverted()
 {
     RubiksCube::rotateFaceInverted(BACK);
-    vector<COLOR> temp(SIZE), temp1(SIZE);
+    vector<COLOR> temp(SIZE);
 
     for (int i = 0; i < SIZE; i++)
         temp[i] = cube[TOP][0][i];
-
     for (int i = 0; i < SIZE; i++)
         cube[TOP][0][i] = cube[LEFT][i][0];
-
     for (int i = 0; i < SIZE; i++)
-        temp1[i] = cube[RIGHT][i][COLS - 1];
-
+        cube[LEFT][i][0] = cube[DOWN][ROWS - 1][i];
+    for (int i = 0; i < SIZE; i++)
+        cube[DOWN][ROWS - 1][i] = cube[RIGHT][i][COLS - 1];
     for (int i = 0; i < SIZE; i++)
         cube[RIGHT][i][COLS - 1] = temp[i];
-
-    for (int i = 0; i < SIZE; i++)
-        temp[i] = cube[DOWN][ROWS - 1][i];
-
-    for (int i = 0; i < SIZE; i++)
-        cube[DOWN][ROWS - 1][i] = temp1[i];
-
-    for (int i = 0; i < SIZE; i++)
-        cube[LEFT][i][0] = temp[i];
 }
 
 void RubiksCube::rotateLeftClockwise()
 {
     RubiksCube::rotateFaceClockwise(LEFT);
-    vector<COLOR> temp(SIZE), temp1(SIZE);
+    vector<COLOR> temp(SIZE);
 
     for (int i = 0; i < SIZE; i++)
         temp[i] = cube[TOP][i][0];
 
     for (int i = 0; i < SIZE; i++)
         cube[TOP][i][0] = cube[BACK][i][COLS - 1];
-
     for (int i = 0; i < SIZE; i++)
-        temp1[i] = cube[FRONT][i][0];
-
+        cube[BACK][i][COLS - 1] = cube[DOWN][i][0];
+    for (int i = 0; i < SIZE; i++)
+        cube[DOWN][i][0] = cube[FRONT][i][0];
     for (int i = 0; i < SIZE; i++)
         cube[FRONT][i][0] = temp[i];
-
-    for (int i = 0; i < SIZE; i++)
-        temp[i] = cube[DOWN][i][0];
-
-    for (int i = 0; i < SIZE; i++)
-        cube[DOWN][i][0] = temp1[i];
-
-    for (int i = 0; i < SIZE; i++)
-        cube[BACK][i][COLS - 1] = temp[i];
 }
 
 void RubiksCube::rotateLeftInverted()
@@ -397,22 +334,18 @@ void RubiksCube::rotateLeftInverted()
 void RubiksCube::rotateDownClockwise()
 {
     RubiksCube::rotateFaceClockwise(DOWN);
-    vector<COLOR> temp(SIZE), temp1(SIZE);
+    vector<COLOR> temp(SIZE);
 
     for (int i = 0; i < SIZE; i++)
         temp[i] = cube[FRONT][ROWS - 1][i];
     for (int i = 0; i < SIZE; i++)
         cube[FRONT][ROWS - 1][i] = cube[LEFT][ROWS - 1][i];
     for (int i = 0; i < SIZE; i++)
-        temp1[i] = cube[RIGHT][ROWS - 1][i];
+        cube[LEFT][ROWS - 1][i] = cube[BACK][ROWS - 1][i];
+    for (int i = 0; i < SIZE; i++)
+        cube[BACK][ROWS - 1][i] = cube[RIGHT][ROWS - 1][i];
     for (int i = 0; i < SIZE; i++)
         cube[RIGHT][ROWS - 1][i] = temp[i];
-    for (int i = 0; i < SIZE; i++)
-        temp[i] = cube[BACK][ROWS - 1][i];
-    for (int i = 0; i < SIZE; i++)
-        cube[BACK][ROWS - 1][i] = temp1[i];
-    for (int i = 0; i < SIZE; i++)
-        cube[LEFT][ROWS - 1][i] = temp[i];
 }
 
 void RubiksCube::rotateDownInverted()
@@ -479,4 +412,23 @@ void RubiksCube::rotateFaceInverted(COLOR face)
             swap(faceRef[i][j], faceRef[ROWS - i - 1][j]);
         }
     }
+}
+
+bool RubiksCube::isFaceSolved(COLOR face)
+{
+    COLOR color = face;
+    COLOR(&faceRef)
+    [ROWS][COLS] = this->cube[face];
+
+    for (int row = 0; row < ROWS; row++)
+    {
+        for (int col = 0; col < COLS; col++)
+        {
+            if (faceRef[row][col] != color)
+            {
+                return false;
+            }
+        }
+    }
+    return true;
 }

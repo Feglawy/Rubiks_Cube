@@ -16,6 +16,10 @@ public:
 
     void shuffle();
 
+    bool isSolved();
+
+    void solve();
+
     void rotateFrontClockwise();
     void rotateFrontInverted();
 
@@ -37,4 +41,5 @@ public:
 private:
     void rotateFaceClockwise(COLOR face);
     void rotateFaceInverted(COLOR face);
+    bool isFaceSolved(COLOR face);
 };
