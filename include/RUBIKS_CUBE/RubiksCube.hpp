@@ -25,8 +25,8 @@ public:
     void rotateUpClockwise();
     void rotateUpInverted();
 
-    void rotateBottomClockwise();
-    void rotateBottomInverted();
+    void rotateBackClockwise();
+    void rotateBackInverted();
 
     void rotateLeftClockwise();
     void rotateLeftInverted();
