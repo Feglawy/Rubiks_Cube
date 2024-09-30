@@ -40,23 +40,33 @@ const static int SIZE = 3;
 const static int ROWS = SIZE;
 const static int COLS = SIZE;
 
+const string RESETCOLOR = "\033[0m";
+const string WHITECOLOR = "\033[37m";
+const string YELLOWCOLOR = "\033[33m";
+const string REDCOLOR = "\033[31m";
+const string PINKCOLOR = "\033[35m";
+const string BLUECOLOR = "\033[34m";
+const string GREENCOLOR = "\033[32m";
+
 static string colorToString(COLOR color)
 {
+    // const string BLOCK = "\u2588\u2588";
+
     switch (color)
     {
     case WHITE:
-        return "\033[37m W";
+        return WHITECOLOR + " W";
     case YELLOW:
-        return "\033[33m Y";
+        return YELLOWCOLOR + " Y";
     case RED:
-        return "\033[31m R";
+        return REDCOLOR + " R";
     case PINK:
-        return "\033[35m P";
+        return PINKCOLOR + " P";
     case BLUE:
-        return "\033[34m B";
+        return BLUECOLOR + " B";
     case GREEN:
-        return "\033[32m G";
+        return GREENCOLOR + " G";
     default:
-        return "\033[0m ?";
+        return RESETCOLOR + " ?";
     }
 }

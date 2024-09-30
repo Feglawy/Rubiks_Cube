@@ -34,6 +34,7 @@ void RubiksCube::displayFace(COLOR face)
         }
         cout << endl;
     }
+    cout << RESETCOLOR;
 }
 
 void RubiksCube::displayCube()
@@ -89,6 +90,7 @@ void RubiksCube::displayCube()
         }
         cout << endl;
     }
+    cout << RESETCOLOR;
 }
 
 void RubiksCube::shuffle()
@@ -100,7 +102,7 @@ void RubiksCube::rotateFrontClockwise()
     RubiksCube::rotateFaceClockwise(FRONT);
 
     vector<COLOR> temp(SIZE), temp1(SIZE);
-    
+
     for (int i = 0; i < SIZE; i++)
         temp[i] = cube[TOP][ROWS - 1][i];
 
