@@ -100,6 +100,7 @@ void RubiksCube::rotateFrontClockwise()
     RubiksCube::rotateFaceClockwise(FRONT);
 
     vector<COLOR> temp(SIZE), temp1(SIZE);
+    
     for (int i = 0; i < SIZE; i++)
         temp[i] = cube[TOP][ROWS - 1][i];
 
@@ -113,19 +114,13 @@ void RubiksCube::rotateFrontClockwise()
         cube[RIGHT][i][0] = temp[i];
 
     for (int i = 0; i < SIZE; i++)
-        temp[i] = temp1[i];
+        temp[i] = cube[DOWN][0][i];
 
     for (int i = 0; i < SIZE; i++)
-        temp1[i] = cube[DOWN][0][i];
+        cube[DOWN][0][i] = temp1[i];
 
     for (int i = 0; i < SIZE; i++)
-        cube[DOWN][0][i] = temp[i];
-
-    for (int i = 0; i < SIZE; i++)
-        temp[i] = temp1[i];
-
-    for (int i = 0; i < SIZE; i++)
-        cube[LEFT][i][SIZE - 1] = temp[i];
+        cube[LEFT][i][COLS - 1] = temp[i];
 }
 
 void RubiksCube::rotateFrontInverted()
