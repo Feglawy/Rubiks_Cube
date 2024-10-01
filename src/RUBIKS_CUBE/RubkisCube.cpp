@@ -97,7 +97,7 @@ void RubiksCube::displayCube()
 void RubiksCube::shuffle()
 {
     srand(time(0));
-    int randomNum = rand() % 101;
+    int randomNum = abs(rand()) % 101;
     while (randomNum--)
     {
         int rotaionType = rand() % 12;
