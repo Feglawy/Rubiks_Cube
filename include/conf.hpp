@@ -16,7 +16,7 @@ typedef long long ll;
 typedef double long dl;
 typedef unsigned long long ull;
 
-enum COLOR
+enum CUBE_PROPERTY
 {
     // Colors
     WHITE,  // 0
@@ -29,12 +29,13 @@ enum COLOR
     // Faces (aliases)
     TOP = WHITE,   // White face
     DOWN = YELLOW, // Yellow face
-    FRONT = RED,   // Red face
-    BACK = PINK,   // PINK face
-    RIGHT = BLUE,  // Blue face
-    LEFT = GREEN   // Green face
+    FRONT = GREEN, // Red face
+    BACK = BLUE,   // PINK face
+    RIGHT = RED,   // Blue face
+    LEFT = PINK    // Green face
 };
 
+// !NOTE it only works on 3*3 cube
 const static int FACES = 6;
 const static int SIZE = 3;
 const static int ROWS = SIZE;
@@ -48,7 +49,7 @@ const string PINKCOLOR = "\033[35m";
 const string BLUECOLOR = "\033[34m";
 const string GREENCOLOR = "\033[32m";
 
-static string colorToString(COLOR color)
+static string colorToString(CUBE_PROPERTY color)
 {
     // const string BLOCK = "\u2588\u2588";
 
