@@ -43,17 +43,16 @@ Move::Move(string move)
 }
 
 Move::Move(const Move &move)
-{
-    this->rotationType = move.doubleRotation;
-    this->inverted = move.inverted;
-    this->doubleRotation = move.doubleRotation;
-}
+    : rotationType(move.rotationType), inverted(move.inverted), doubleRotation(move.doubleRotation) {}
 
-Move::Move(char rotationType, bool inverted, bool doubleRotation)
+Move::Move(char type, bool _inverted, bool _doubleRotation)
 {
-    this->rotationType = rotationType;
-    this->inverted = inverted;
-    this->doubleRotation = doubleRotation;
+    string _rotationType(type, 1);
+    ValidateMove(_rotationType);
+
+    this->rotationType = type;
+    this->inverted = _inverted;
+    this->doubleRotation = _doubleRotation;
 }
 
 void Move::setMove(string move)
@@ -69,6 +68,11 @@ void Move::setMove(string move)
         else
             this->inverted = true;
     }
+}
+
+void Move::reverse()
+{
+    this->inverted = !this->inverted;
 }
 
 bool Move::operator==(const Move &other) const
