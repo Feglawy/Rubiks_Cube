@@ -21,6 +21,9 @@ public:
 
     void setMove(string move);
 
+    // reverse the move
+    void reverse();
+
     char getRotationType() const;
     bool isInverted() const;
     bool isDouble() const;
