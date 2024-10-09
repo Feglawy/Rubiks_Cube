@@ -97,7 +97,11 @@ void RubiksCube::displayCube()
 void RubiksCube::shuffle()
 {
     srand(time(0));
-    int randomNum = abs(rand()) % 101;
+
+    int NUM_OF_AT_LEAST_MOVES = 5;
+    int RANDOM_MOVES = rand() % 16;
+
+    int randomNum = NUM_OF_AT_LEAST_MOVES + RANDOM_MOVES;
     while (randomNum--)
     {
         Move randMove = RubiksCube::generateRandomMove();

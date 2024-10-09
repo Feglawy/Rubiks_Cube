@@ -7,10 +7,12 @@ using namespace std;
 #define read (void)freopen("../input.txt", "r", stdin);
 #define write (void)freopen("../output.txt", "w", stdout);
 #define clearConsole system("cls");
-#define pauseConsole system("pause");
+#define pauseConsole system("pause>nul");
 #define makeConsoleUTF8 system("chcp 65001");
 
 #define all(v) (v).begin(), (v).end()
+
+#define endl "\n";
 
 typedef long long ll;
 typedef double long dl;
