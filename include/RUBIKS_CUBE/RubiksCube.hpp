@@ -3,8 +3,10 @@
 #include "Move.hpp"
 class RubiksCube
 {
-private:
+public:
     CUBE_PROPERTY cube[FACES][ROWS][COLS];
+    
+private:
     const vector<char> validRotations = {
         'F', 'B', 'R', 'L', 'U', 'D'};
 
@@ -24,6 +26,7 @@ private:
 
 public:
     RubiksCube();
+    RubiksCube(CUBE_PROPERTY _cube[FACES][ROWS][COLS]);
 
     // displays a specific face of the cube
     void displayFace(CUBE_PROPERTY face);

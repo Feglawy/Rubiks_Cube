@@ -9,6 +9,20 @@ RubiksCube::RubiksCube()
     }
 }
 
+RubiksCube::RubiksCube(CUBE_PROPERTY _cube[FACES][ROWS][COLS])
+{
+    for (int face = 0; face < FACES; face++)
+    {
+        for (int row = 0; row < ROWS; row++)
+        {
+            for (int col = 0; col < COLS; col++)
+            {
+                this->cube[face][row][col] = _cube[face][row][col];
+            }
+        }
+    }
+}
+
 void RubiksCube::fillFace(CUBE_PROPERTY face_color)
 {
     CUBE_PROPERTY(&face_ref)

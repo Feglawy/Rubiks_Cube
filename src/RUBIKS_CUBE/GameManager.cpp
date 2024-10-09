@@ -67,6 +67,7 @@ void GameManager::doMove(string inpMove)
     catch (const std::exception &e)
     {
         std::cerr << e.what() << '\n';
+        pauseConsole;
     }
 }
 
