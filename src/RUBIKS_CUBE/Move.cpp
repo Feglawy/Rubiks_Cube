@@ -47,7 +47,7 @@ Move::Move(const Move &move)
 
 Move::Move(char type, bool _inverted, bool _doubleRotation)
 {
-    string _rotationType(type, 1);
+    string _rotationType(1, type);
     ValidateMove(_rotationType);
 
     this->rotationType = type;
